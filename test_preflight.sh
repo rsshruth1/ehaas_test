@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Need to run this on the provisioned machine
+# sh test_preflight.sh should run this
+
+# Check if we have the preflight output file on the machine
+# If the preflight scripts are run on this machine then it would
+# be avaiable 
+if [ -f /tmp/preflight/preflight_output.txt ]
+then
+        echo "File exists as expected "
+else
+        echo "File output.txt does not exists as expected... FAILED!!"
+        exit 1
+fi
+
 # Check for the number of components that are failing and passing
 var1=`grep -o '\bOK\b' /tmp/preflight/preflight_output.txt | wc -l`
 var2=`grep -o '\bFail\b' /tmp/preflight/preflight_output.txt | wc -l`
